@@ -3,7 +3,7 @@ export const site = {
   tagline: "Grocery, household and general merchandise",
   phoneDisplay: "+1 (307) 400-4140",
   phoneHref: "tel:+13074004140",
-  email: "orders@shanzenenterprises.com",
+  email: "sales@shanzenenterprises.com",
   address: {
     line1: "30 N Gould St Ste R",
     city: "Sheridan",
