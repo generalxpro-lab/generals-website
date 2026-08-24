@@ -1,6 +1,6 @@
-# Shanzen Enterprises Showcase
+# Shanzen Enterprises
 
-Build a premium, modern eCommerce demo website for Shanzen Enterprises using https://duranishop.com/ only as a visual inspiration for layout, spacing, animations, and overall shopping experience. Do not copy copyrighted images, logos, or text directly. Create an original website with a very similar premium feel.
+A premium, modern eCommerce website for Shanzen Enterprises using professional design standards for layout, spacing, animations, and overall shopping experience.
 
 Company Information
 
@@ -12,11 +12,11 @@ Company Information
 
  Add a prominent Call Now button in the header and as a floating mobile button.
 
- This is a demo online store only. No real checkout or payment processing. Buttons may navigate between pages or display placeholder messages.
+ Online store platform. No real checkout or payment processing. Buttons navigate between pages or display placeholder messages.
 
 Design
 
- Luxury modern eCommerce appearance inspired by the reference.
+ Luxury modern eCommerce appearance.
 
  Glassmorphism effects.
 
@@ -32,7 +32,7 @@ Design
 
  Modern typography.
 
- High-quality royalty-free lifestyle/product images similar in style to the reference.
+ High-quality royalty-free lifestyle/product images.
 
  Fully responsive for desktop, tablet, and mobile.
 
@@ -252,10 +252,6 @@ Technical
  Accessibility support
 
  Responsive design
-
-Important: Use the reference website only as design inspiration. Create an original implementation with different colors, spacing, components, icons, typography, and royalty-free images.
-
-One more thing: if this site is intended to help build credibility for Amazon wholesale or distributors, an online retail store may actually work against that goal. Many brands and distributors prefer to see a professional company website with an "About Us," business information, wholesale capabilities, and contact details—not a fake consumer storefront. If the objective is getting approved by brands, a business-focused website is usually the stronger choice.
 
 This project was built with [Lovable](https://lovable.dev).
 

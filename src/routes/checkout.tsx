@@ -14,7 +14,7 @@ export const Route = createFileRoute("/checkout")({
       { title: "Checkout — Delivery Address | Shanzen Enterprises" },
       { name: "description", content: "Enter a delivery address to complete your order with Shanzen Enterprises." },
       { property: "og:title", content: "Checkout — Delivery Address | Shanzen Enterprises" },
-      { property: "og:description", content: "Secure checkout for the Shanzen Enterprises catalog." },
+      { property: "og:description", content: "Secure checkout for Shanzen Enterprises." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex" },
@@ -106,14 +106,14 @@ function Checkout() {
           </div>}
 
           <div className="mt-6 space-y-2 rounded-2xl border border-border bg-secondary/40 p-5 text-left text-sm text-muted-foreground">
-            <p className="flex gap-2"><BadgeCheck size={16} className="mt-0.5 shrink-0 text-success" aria-hidden="true" /><span>Your tracking number can be entered on the homepage to view the delivery timeline.</span></p>
+            <p className="flex gap-2"><BadgeCheck size={16} className="mt-0.5 shrink-0 text-success" aria-hidden="true" /><span>Your tracking number can be entered on the homepage to view the delivery status.</span></p>
             <p className="flex gap-2"><Copy size={16} className="mt-0.5 shrink-0 text-accent" aria-hidden="true" /><span>Keep your order and tracking numbers handy for support.</span></p>
-            <p className="flex gap-2"><Phone size={16} className="mt-0.5 shrink-0 text-accent" aria-hidden="true" /><span>Questions? Call <a href={site.phoneHref} className="font-semibold text-accent hover:underline">{site.phoneDisplay}</a> during business hours.</span></p>
+            <p className="flex gap-2"><Phone size={16} className="mt-0.5 shrink-0 text-accent" aria-hidden="true" /><span>Questions? Call <a href={site.phoneHref} className="font-semibold text-accent hover:text-amber">{site.phoneDisplay}</a></span></p>
           </div>
 
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Link to="/" className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-accent">Continue shopping</Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-bold text-primary shadow-soft transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent">Contact support</Link>
+            <Link to="/contact" className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-bold text-primary shadow-soft transition-all hover:-translate-y-0.5 hover:border-accent">Contact support</Link>
           </div>
         </div>
       </Section>
@@ -122,9 +122,9 @@ function Checkout() {
 
   return (
     <>
-      <nav aria-label="Breadcrumb" className="mx-auto max-w-7xl px-4 pt-8 lg:px-8"><ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground"><li><Link to="/" className="hover:text-accent">Home</Link></li><ChevronRight size={12} aria-hidden="true" /><li className="font-semibold text-foreground">Checkout</li></ol></nav>
+      <nav aria-label="Breadcrumb" className="mx-auto max-w-7xl px-4 pt-8 lg:px-8"><ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground"><li><Link to="/" className="hover:text-accent">Home</Link></li><li>/</li><li>Checkout</li></ol></nav>
       <Section className="py-10">
-        <SectionHeader eyebrow="Step 1 of 1" title="Delivery address" description="Enter your shipping details. No card details are requested online — our team will confirm payment and dispatch by phone." />
+        <SectionHeader eyebrow="Step 1 of 1" title="Delivery address" description="Enter your shipping details. No card details are requested online — our team will confirm payment and dispatch details by phone." />
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <form onSubmit={placeOrder} className="rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8">
             <div className="grid gap-4 sm:grid-cols-2">
@@ -136,15 +136,15 @@ function Checkout() {
               <label className="text-sm font-semibold text-foreground">State<input required name="state" autoComplete="address-level1" placeholder="WY" className={field} /></label>
               <label className="text-sm font-semibold text-foreground">ZIP code<input required name="zip" autoComplete="postal-code" inputMode="numeric" placeholder="82801" className={field} /></label>
               <label className="text-sm font-semibold text-foreground">Country<input required name="country" autoComplete="country-name" defaultValue="United States" className={field} /></label>
-              <label className="text-sm font-semibold text-foreground sm:col-span-2">Delivery notes <span className="font-normal text-muted-foreground">(optional)</span><textarea name="notes" rows={3} placeholder="Loading bay access, preferred delivery window, etc." className={field} /></label>
+              <label className="text-sm font-semibold text-foreground sm:col-span-2">Delivery notes <span className="font-normal text-muted-foreground">(optional)</span><textarea name="notes" rows={3} placeholder="Special delivery instructions..." className={field} /></label>
             </div>
-            <button type="submit" className="cta-pulse mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-accent sm:w-auto">Place order</button>
-            <p className="mt-3 text-xs text-muted-foreground">By placing this order you acknowledge that final payment and dispatch will be confirmed by a Shanzen Enterprises team member by phone.</p>
+            <button type="submit" className="cta-pulse mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-accent">Continue to confirmation <ChevronRight size={16} /></button>
+            <p className="mt-3 text-xs text-muted-foreground">By placing this order you acknowledge that final payment and dispatch will be confirmed by a Shanzen Enterprises team member by phone within one business day.</p>
           </form>
 
           <aside className="space-y-4">
-            <div className="rounded-3xl border border-border bg-card p-6 shadow-soft"><h2 className="text-lg font-extrabold text-foreground">Order summary</h2>{product ? <><div className="mt-4 flex items-center gap-4"><img src={product.image} alt={product.name} width={80} height={80} loading="lazy" decoding="async" className="h-20 w-20 shrink-0 rounded-xl object-cover" /><div className="min-w-0"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{product.brand}</p><p className="line-clamp-2 text-sm font-semibold text-foreground">{product.name}</p><p className="text-xs text-muted-foreground">{product.size} · Qty 1</p></div></div><dl className="mt-5 space-y-2 border-t border-border pt-4 text-sm">{[{ l: "Subtotal", v: money(product.price) }, { l: "Shipping", v: shipping === 0 ? "Free" : money(shipping) }, { l: "Estimated tax", v: money(tax) }].map((r) => <div key={r.l} className="flex justify-between"><dt className="text-muted-foreground">{r.l}</dt><dd className="font-semibold text-foreground">{r.v}</dd></div>)}<div className="flex items-baseline justify-between border-t border-border pt-3"><dt className="font-bold text-foreground">Total</dt><dd className="font-display text-2xl font-extrabold text-primary">{money(total)}</dd></div></dl></> : <p className="mt-3 text-sm text-muted-foreground">No item selected. Browse the <Link to="/shop" search={{ cat: undefined, q: undefined }} className="font-semibold text-accent hover:underline">shop</Link> and choose Buy now on any product.</p>}</div>
-            <div className="rounded-3xl border border-border bg-card p-6 shadow-soft"><p className="flex items-center gap-2 text-sm font-bold text-foreground"><ShieldCheck size={16} className="text-accent" aria-hidden="true" /> Secure checkout — payment confirmed by phone</p><p className="mt-2 text-xs leading-relaxed text-muted-foreground">Standard ground delivery runs 2–5 business days. Orders over $75 ship free; below that flat-rate shipping is $6.95. Returns accepted within 30 days on unopened items.</p><PaymentIcons className="mt-4" /></div>
+            <div className="rounded-3xl border border-border bg-card p-6 shadow-soft"><h2 className="text-lg font-extrabold text-foreground">Order summary</h2>{product ? <><div className="mt-4 flex items-center gap-4"><img src={product.image} alt={product.name} width={80} height={80} loading="lazy" decoding="async" className="h-20 w-20 shrink-0 rounded-xl object-cover" /><div className="min-w-0"><p className="text-sm font-semibold text-foreground">{product.name}</p><p className="text-xs text-muted-foreground">{product.size} · {product.variant}</p></div></div><div className="mt-4 space-y-2 text-sm"><div className="flex justify-between"><span className="text-muted-foreground">Price</span><span className="font-semibold text-foreground">{money(product.price)}</span></div><div className="flex justify-between"><span className="text-muted-foreground">Shipping</span><span className="font-semibold text-foreground">{shipping === 0 ? "Free" : money(shipping)}</span></div><div className="flex justify-between"><span className="text-muted-foreground">Sales tax</span><span className="font-semibold text-foreground">{money(tax)}</span></div><div className="border-t border-border pt-2 font-display text-lg font-extrabold text-primary"><div className="flex justify-between"><span>Total</span>{money(total)}</div></div></div></> : <p className="mt-4 text-sm text-muted-foreground">Select a product to view the order summary.</p>}</div>
+            <div className="rounded-3xl border border-border bg-card p-6 shadow-soft"><p className="flex items-center gap-2 text-sm font-bold text-foreground"><ShieldCheck size={16} className="text-success" aria-hidden="true" />Secure checkout</p><p className="mt-2 text-xs text-muted-foreground">Your information is encrypted and protected during the checkout process.</p></div>
           </aside>
         </div>
       </Section>
