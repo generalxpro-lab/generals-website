@@ -1,17 +1,24 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Heart, ShoppingBag } from "lucide-react";
+import { toast } from "sonner";
 import { money, stockLabel, type Product } from "@/data/catalog";
 import { Stars } from "./Stars";
 import { useWishlist } from "@/lib/wishlist";
+import { useCart } from "@/lib/cart";
 
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const stock = stockLabel(product.stock);
   const { has, toggle } = useWishlist();
+  const { add } = useCart();
   const wished = has(product.slug);
   const navigate = useNavigate();
   const openWishlist = () => {
     if (!wished) toggle(product.slug);
     navigate({ to: "/wishlist" });
+  };
+  const addToCart = () => {
+    add(product);
+    toast.success("Added to cart", { description: product.name });
   };
 
   return (
@@ -36,7 +43,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         <div className="mt-auto space-y-3 pt-1">
           <div className="flex flex-wrap items-baseline gap-2"><span className="font-display text-xl font-extrabold text-primary">{money(product.price)}</span>{product.oldPrice > product.price && <span className="text-sm text-muted-foreground line-through">{money(product.oldPrice)}</span>}</div>
           <span className={`inline-flex items-center gap-1.5 text-xs font-semibold ${stock.tone === "in" ? "text-success" : stock.tone === "low" ? "text-warning" : "text-destructive"}`}><span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true" />{stock.text}</span>
-          <div className="flex gap-2"><Link to="/product/$slug" params={{ slug: product.slug }} className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-semibold text-primary transition-all duration-300 hover:border-accent hover:text-accent">Details<ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" /></Link><Link to="/checkout" search={{ product: product.slug }} className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-primary px-3 py-2.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-accent hover:shadow-glow"><ShoppingBag size={15} /> Buy now</Link></div>
+          <div className="grid grid-cols-2 gap-2"><Link to="/product/$slug" params={{ slug: product.slug }} className="flex items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-semibold text-primary transition-all duration-300 hover:border-accent hover:text-accent">Details<ArrowRight size={15} /></Link><button type="button" onClick={addToCart} disabled={product.stock <= 0} className="flex items-center justify-center gap-1.5 rounded-xl bg-accent px-3 py-2.5 text-sm font-semibold text-accent-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50"><ShoppingBag size={15} /> Add</button></div>
         </div>
       </div>
     </article>
