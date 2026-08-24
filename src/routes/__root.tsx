@@ -19,6 +19,7 @@ import { ComingSoon } from "../components/site/ComingSoon";
 import { WishlistProvider } from "../lib/wishlist";
 import { CustomerProvider } from "../lib/customer";
 import { OrdersProvider } from "../lib/orders";
+import { CartProvider } from "../lib/cart";
 import { addressOneLine, site } from "../lib/site";
 
 function NotFoundComponent() {
@@ -113,14 +114,16 @@ function RootComponent() {
       <WishlistProvider>
         <CustomerProvider>
           <OrdersProvider>
-            <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground">Skip to content</a>
-            <PageLoader />
-            <Header />
-            <main id="main"><Outlet /></main>
-            <Footer />
-            <FloatingPromos />
-            <FloatingCall />
-            <Toaster />
+            <CartProvider>
+              <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground">Skip to content</a>
+              <PageLoader />
+              <Header />
+              <main id="main"><Outlet /></main>
+              <Footer />
+              <FloatingPromos />
+              <FloatingCall />
+              <Toaster />
+            </CartProvider>
           </OrdersProvider>
         </CustomerProvider>
       </WishlistProvider>
