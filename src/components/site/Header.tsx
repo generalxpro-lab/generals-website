@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Heart, Menu, PhoneCall, Search, UserRound, X } from "lucide-react";
+import { Heart, Menu, PhoneCall, Search, ShoppingCart, UserRound, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { AuthDialog } from "./AuthDialog";
+import { CartPanel } from "./CartPanel";
 import { site } from "@/lib/site";
 import { useWishlist } from "@/lib/wishlist";
 import { useCustomer } from "@/lib/customer";
+import { useCart } from "@/lib/cart";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -20,10 +22,12 @@ const nav = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
   const { count: wishlistCount } = useWishlist();
+  const { count: cartCount } = useCart();
   const { customer } = useCustomer();
 
   useEffect(() => {
@@ -63,6 +67,10 @@ export function Header() {
                 <Heart size={18} />
                 {wishlistCount > 0 && <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-coral px-1 text-[0.65rem] font-bold text-coral-foreground">{wishlistCount}</span>}
               </Link>
+              <button type="button" onClick={() => setCartOpen(true)} className="relative grid h-11 w-11 place-items-center rounded-xl border border-border bg-card text-primary transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent" aria-label={`Shopping cart${cartCount ? `, ${cartCount} items` : ""}`}>
+                <ShoppingCart size={18} />
+                {cartCount > 0 && <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-accent px-1 text-[0.65rem] font-bold text-accent-foreground">{cartCount}</span>}
+              </button>
               <button type="button" onClick={() => setAuthOpen(true)} className="hidden items-center gap-2 rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-bold text-primary transition-all hover:border-accent hover:text-accent sm:inline-flex">
                 <UserRound size={16} /> <span className="max-w-28 truncate">{customer ? customer.firstName : "Sign in"}</span>
               </button>
@@ -81,11 +89,12 @@ export function Header() {
         </div>
         {open && <div className="glass animate-fade-in border-t border-border lg:hidden"><div className="mx-auto max-w-7xl space-y-3 px-4 py-4">
           <form onSubmit={search} className="flex gap-2"><label className="sr-only" htmlFor="mobile-search">Search products</label><input id="mobile-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search products…" className="min-w-0 flex-1 rounded-xl border border-border bg-card px-3 py-2.5 text-sm" /><button type="submit" className="shrink-0 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground">Search</button></form>
-          <div className="grid grid-cols-2 gap-2"><Link to="/wishlist" onClick={() => setOpen(false)} className="rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-semibold text-foreground">Wishlist{wishlistCount ? ` (${wishlistCount})` : ""}</Link><button type="button" onClick={() => { setOpen(false); setAuthOpen(true); }} className="rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-semibold text-foreground">{customer ? customer.firstName : "Sign in"}</button></div>
+          <div className="grid grid-cols-3 gap-2"><Link to="/wishlist" onClick={() => setOpen(false)} className="rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-semibold text-foreground">Wishlist{wishlistCount ? ` (${wishlistCount})` : ""}</Link><button type="button" onClick={() => { setOpen(false); setCartOpen(true); }} className="rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-semibold text-foreground">Cart{cartCount ? ` (${cartCount})` : ""}</button><button type="button" onClick={() => { setOpen(false); setAuthOpen(true); }} className="rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-semibold text-foreground">{customer ? customer.firstName : "Sign in"}</button></div>
           <ul className="grid grid-cols-2 gap-2">{[...nav, { to: "/faq", label: "FAQ" } as const].map((n) => <li key={n.to}><Link to={n.to} onClick={() => setOpen(false)} className="block rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-semibold text-foreground">{n.label}</Link></li>)}</ul>
         </div></div>}
       </header>
       <AuthDialog open={authOpen} onOpenChange={setAuthOpen} />
+      <CartPanel open={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );
 }
