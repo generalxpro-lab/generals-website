@@ -1,5 +1,6 @@
 export type Review = {
   id: number;
+  productSlug: string;
   name: string;
   location: string;
   rating: number;
@@ -10,157 +11,111 @@ export type Review = {
   verified: boolean;
 };
 
-// Demo/showcase reviews: all displayed locations are within Wyoming.
-// These are not represented as verified historical customer purchases.
-export const ratingDistribution = [
-  { stars: 5, percent: 70 },
-  { stars: 4, percent: 18 },
-  { stars: 3, percent: 7 },
-  { stars: 2, percent: 3 },
-  { stars: 1, percent: 2 },
-];
-
-export const reviewSummary = {
-  average: 4.5,
-  total: 12,
+// SAMPLE / DEMO REVIEWS ONLY. These are generated storefront content for testing the review UI.
+// They are intentionally not marked as verified customer purchases and must be replaced with genuine customer feedback before launch.
+const productReviewCounts: Record<string, number> = {
+  "medicube-collagen-jelly-cream-firming-hydrating": 22,
+  "medicube-salmon-dna-pdrn-pink-peptide-serum-glow-firming": 48,
+  "medicube-zero-pore-pads-2-0-exfoliating-toner-pads": 15,
+  "bic-round-stic-xtra-life-ballpoint-pens-black-60-pack": 27,
+  "expo-dry-erase-markers-fine-tip-assorted-colors-12-pack": 31,
+  "gorilla-mounting-putty-168-squares-removable-reusable": 12,
+  "pilot-g2-gel-pens-fine-point-black-12-pack": 26,
+  "sharpie-permanent-marker-set-variety-pack-black-6-count": 19,
+  "sharpie-permanent-markers-black-fine-point-12-pack": 47,
+  "blue-buffalo-health-bars-pumpkin-cinnamon-16-oz": 24,
+  "blue-buffalo-life-protection-dog-food-chicken-brown-rice-5-lb": 33,
+  "earth-rated-pet-wipes-unscented-hypoallergenic-100-count": 14,
+  "milk-bone-original-dog-biscuits-medium-dogs-10-lb": 29,
+  "pedigree-dentastix-for-large-dogs-variety-pack-51-treats": 11,
+  "sheba-perfect-portions-wet-cat-food-variety-pack-24-twin-packs": 23,
+  "vital-essentials-beef-liver-dog-treats-freeze-dried-2-1-oz": 18,
+  "talking-flash-cards-montessori-language-learning-224-words": 45,
 };
 
-export const reviews: Review[] = [
-  {
-    id: 1,
-    name: "Marissa Coleman",
-    location: "Sheridan, WY",
-    rating: 5,
-    date: "March 4, 2026",
-    title: "Restocked our whole pantry in one order",
-    body: "I ordered several household items together and everything arrived packed properly with nothing damaged. The selection made it easy to get what I needed in one order.",
-    response: "Thank you for the detailed feedback, Marissa. We appreciate your business.",
-    verified: false,
-  },
-  {
-    id: 2,
-    name: "Devon Whitaker",
-    location: "Cheyenne, WY",
-    rating: 5,
-    date: "February 21, 2026",
-    title: "Reliable household shopping",
-    body: "The products arrived in good condition and the ordering process was straightforward. I would shop here again.",
-    response: "Thank you, Devon. We appreciate the feedback and hope to serve you again.",
-    verified: false,
-  },
-  {
-    id: 3,
-    name: "Priya Raghunathan",
-    location: "Casper, WY",
-    rating: 4,
-    date: "February 9, 2026",
-    title: "Good products and easy ordering",
-    body: "The items were as described and arrived well packed. The website made it easy to find what I wanted.",
-    response: "Thanks for sharing your experience, Priya. We appreciate the feedback.",
-    verified: false,
-  },
-  {
-    id: 4,
-    name: "Andre Lassiter",
-    location: "Gillette, WY",
-    rating: 4,
-    date: "January 28, 2026",
-    title: "Good value",
-    body: "The product quality was good for the price and everything arrived safely. The checkout process was simple.",
-    response: "Appreciate the honest feedback, Andre. Thank you for shopping with us.",
-    verified: false,
-  },
-  {
-    id: 5,
-    name: "Karen Ojeda",
-    location: "Laramie, WY",
-    rating: 3,
-    date: "January 16, 2026",
-    title: "Good products",
-    body: "The products themselves were fine. Delivery took a little longer than I expected, but everything arrived safely.",
-    response: "Thanks for the feedback, Karen. We appreciate your patience.",
-    verified: false,
-  },
-  {
-    id: 6,
-    name: "Thomas Bergeron",
-    location: "Rock Springs, WY",
-    rating: 5,
-    date: "January 5, 2026",
-    title: "Easy experience",
-    body: "The site was easy to use and my order arrived in good condition. No problems with the process.",
-    response: "Thank you, Thomas. We are glad the experience was smooth.",
-    verified: false,
-  },
-  {
-    id: 7,
-    name: "Sofia Marchetti",
-    location: "Cody, WY",
-    rating: 2,
-    date: "December 19, 2025",
-    title: "Packaging could be better",
-    body: "One item arrived with damaged packaging, although the rest of the order was fine. I would like to see more protection around fragile items.",
-    response: "Thank you for pointing that out, Sofia. Packaging feedback helps us improve the experience.",
-    verified: false,
-  },
-  {
-    id: 8,
-    name: "Nathan Ekwueme",
-    location: "Jackson, WY",
-    rating: 5,
-    date: "December 8, 2025",
-    title: "Good prices",
-    body: "I found the pricing competitive and the products arrived as expected. I will check the store again when I need to restock.",
-    response: "Glad the value worked out, Nathan. We appreciate you taking the time to leave feedback.",
-    verified: false,
-  },
-  {
-    id: 9,
-    name: "Grace Lindqvist",
-    location: "Riverton, WY",
-    rating: 4,
-    date: "November 27, 2025",
-    title: "Happy with the order",
-    body: "Everything was straightforward from browsing to delivery. The item matched the description and arrived in good shape.",
-    response: "Thanks for the practical feedback, Grace. We appreciate it.",
-    verified: false,
-  },
-  {
-    id: 10,
-    name: "Malik Turner",
-    location: "Buffalo, WY",
-    rating: 1,
-    date: "November 14, 2025",
-    title: "Order issue",
-    body: "There was an issue with the item I received. The overall experience was disappointing, although the site itself was easy to navigate.",
-    response: "We appreciate the honest feedback, Malik. We are continuing to improve the ordering experience.",
-    verified: false,
-  },
-  {
-    id: 11,
-    name: "Elena Vasquez",
-    location: "Rawlins, WY",
-    rating: 5,
-    date: "November 2, 2025",
-    title: "Exactly what I needed",
-    body: "The product was as described and arrived safely. I liked having several everyday items available in one place.",
-    response: "Thank you, Elena. We appreciate the positive feedback.",
-    verified: false,
-  },
-  {
-    id: 12,
-    name: "Jonah Feldman",
-    location: "Evanston, WY",
-    rating: 3,
-    date: "October 21, 2025",
-    title: "Mostly good",
-    body: "Most of the experience was good. I would like to see more product availability in the future.",
-    response: "Thanks for the feedback, Jonah. We are continuing to expand product availability.",
-    verified: false,
-  },
+const names = [
+  "Avery Morgan", "Jordan Ellis", "Taylor Brooks", "Casey Bennett", "Riley Parker", "Morgan Hayes",
+  "Jamie Carter", "Drew Sullivan", "Cameron Reed", "Quinn Foster", "Alex Monroe", "Peyton Ross",
+  "Reese Coleman", "Skyler James", "Harper Lane", "Dakota Wells", "Emerson Grant", "Rowan Blake",
+  "Finley Scott", "Kendall Moore", "Sage Turner", "Charlie Hayes", "Blair Cooper", "Mackenzie Bell",
+];
+const locations = ["Sheridan, WY", "Cheyenne, WY", "Casper, WY", "Gillette, WY", "Laramie, WY", "Cody, WY", "Jackson, WY", "Riverton, WY"];
+const titles = [
+  "Good everyday product", "Worked as expected", "Solid value", "Easy to use", "Happy with the purchase",
+  "Useful and convenient", "Good quality", "Would consider buying again", "Mostly good", "Decent overall",
+];
+const bodies = [
+  "The item arrived in good condition and matched the listing. It was straightforward to use.",
+  "I liked the overall quality and the product did what I expected. Packaging was fine too.",
+  "The product was useful for everyday needs. There were no major issues with my sample order.",
+  "Good option for the price. I would compare availability before ordering again.",
+  "The item was as described. Delivery and packaging were acceptable, with a few small things that could be improved.",
+  "It worked well for what I needed. The experience was generally smooth from browsing through delivery.",
+  "A reasonable product overall. I liked some parts of it more than others, but it was usable.",
+];
+const responses = [
+  "Thank you for the feedback. We appreciate you taking the time to share it.",
+  "Thanks for sharing your experience. Your feedback helps us improve the storefront.",
+  "We appreciate the review and the specific feedback.",
 ];
 
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+const productSlugs = Object.keys(productReviewCounts);
+const reviewPool: Review[] = [];
+let reviewId = 1;
+
+productSlugs.forEach((productSlug, productIndex) => {
+  const count = productReviewCounts[productSlug];
+  for (let i = 0; i < count; i += 1) {
+    // Deterministic mixed ratings: mostly 4/5, with realistic lower ratings included.
+    const rating = [5, 4, 5, 3, 4, 5, 2, 4, 5, 3, 4, 1][(i + productIndex * 3) % 12];
+    const dayOffset = productIndex * 2 + i;
+    const date = new Date(Date.UTC(2026, 7, 25));
+    date.setUTCDate(date.getUTCDate() - dayOffset);
+    reviewPool.push({
+      id: reviewId++,
+      productSlug,
+      name: names[(i + productIndex) % names.length],
+      location: locations[(i * 2 + productIndex) % locations.length],
+      rating,
+      date: date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }),
+      title: titles[(i + productIndex) % titles.length],
+      body: bodies[(i * 3 + productIndex) % bodies.length],
+      response: responses[(i + productIndex) % responses.length],
+      verified: false,
+    });
+  }
+});
+
+export const reviews: Review[] = reviewPool;
+
+export const productReviewStats = Object.fromEntries(
+  productSlugs.map((slug) => {
+    const productReviews = reviews.filter((review) => review.productSlug === slug);
+    const average = productReviews.reduce((sum, review) => sum + review.rating, 0) / productReviews.length;
+    return [slug, { average: Number(average.toFixed(1)), total: productReviews.length }];
+  }),
+) as Record<string, { average: number; total: number }>;
+
+export const getProductReviewStats = (productSlug: string) =>
+  productReviewStats[productSlug] ?? { average: 0, total: 0 };
+
+export const reviewSummary = {
+  average: Number((reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1)),
+  total: reviews.length,
+};
+
+export const ratingDistribution = [5, 4, 3, 2, 1].map((stars) => ({
+  stars,
+  percent: Math.round((reviews.filter((review) => review.rating === stars).length / reviews.length) * 100),
+}));
+
 export const faqs = [
+  {
+    q: "Are the reviews on this site real customer reviews?",
+    a: "The current review dataset is sample storefront content for demonstration and testing. It is not represented as verified historical customer feedback and should be replaced with genuine customer reviews before launch.",
+  },
   {
     q: "Is this a real online store?",
     a: "This website is a showcase catalog for Shanzen Enterprises. Product pages, pricing and promotions are illustrative. To place a real order or request a quote, call us at (307) 400-4140.",
