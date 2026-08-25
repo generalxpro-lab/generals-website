@@ -123,7 +123,7 @@ export function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-primary-foreground/70 sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <p>© {new Date().getFullYear()} Shanzen Enterprises. All rights reserved.</p>
           <p>
-            Products, pricing and reviews are illustrative. Call us to confirm live availability and place an order.
+            Contact us for current product availability, pricing, and ordering information.
           </p>
         </div>
       </div>
