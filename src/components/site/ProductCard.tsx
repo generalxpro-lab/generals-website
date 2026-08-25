@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Heart, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
+import { getProductReviewStats } from "@/data/reviews";
 import { money, stockLabel, type Product } from "@/data/catalog";
 import { Stars } from "./Stars";
 import { useWishlist } from "@/lib/wishlist";
@@ -8,6 +9,7 @@ import { useCart } from "@/lib/cart";
 
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const stock = stockLabel(product.stock);
+  const reviewStats = getProductReviewStats(product.slug);
   const { has, toggle } = useWishlist();
   const { add } = useCart();
   const wished = has(product.slug);
@@ -38,7 +40,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         <Link to="/brands/$slug" params={{ slug: product.brandSlug }} className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent">{product.brand}</Link>
         <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-foreground"><Link to="/product/$slug" params={{ slug: product.slug }} className="hover:text-accent">{product.name}</Link></h3>
         <p className="text-xs font-medium text-muted-foreground">{product.size} · {product.variant}</p>
-        {product.reviewCount > 0 && <div className="flex flex-wrap items-center gap-x-2 gap-y-1"><Stars rating={product.rating} /><span className="text-xs font-medium text-foreground">{product.rating.toFixed(1)}</span><span className="text-xs text-muted-foreground">({product.reviewCount} reviews)</span></div>}
+        {reviewStats.total > 0 && <div className="flex flex-wrap items-center gap-x-2 gap-y-1"><Stars rating={reviewStats.average} /><span className="text-xs font-medium text-foreground">{reviewStats.average.toFixed(1)}</span><span className="text-xs text-muted-foreground">({reviewStats.total} reviews)</span></div>}
         <p className="line-clamp-2 text-xs text-muted-foreground">{product.short}</p>
         <div className="mt-auto space-y-3 pt-1">
           <div className="flex flex-wrap items-baseline gap-2"><span className="font-display text-xl font-extrabold text-primary">{money(product.price)}</span>{product.oldPrice > product.price && <span className="text-sm text-muted-foreground line-through">{money(product.oldPrice)}</span>}</div>
