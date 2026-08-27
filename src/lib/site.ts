@@ -1,8 +1,8 @@
 export const site = {
   name: "Shanzen Enterprises",
   tagline: "Grocery, household and general merchandise",
-  phoneDisplay: "+1 (307) 400-4140",
-  phoneHref: "tel:+13074004140",
+  phoneDisplay: "1 3075003955",
+  phoneHref: "tel:+13075003955",
   email: "sales@shanzenenterprises.com",
   address: {
     line1: "30 N Gould St Ste R",
